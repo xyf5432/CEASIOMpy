@@ -17,8 +17,6 @@ TODO:
 import pandas as pd
 
 from packaging.version import Version
-
-PANDAS_VERSION = Version(pd.__version__)
 from ceasiompy.utils.progress import progress_update
 from ceasiompy.utils.ceasiompyutils import call_main
 from ceasiompy.smtrain.func.utils import (
@@ -56,6 +54,10 @@ from ceasiompy.smtrain import (
     LEVEL_TWO,
     MODULE_NAME as SMTRAIN,
 )
+
+
+# Constants
+PANDAS_VERSION = Version(pd.__version__)
 
 
 # Methods
