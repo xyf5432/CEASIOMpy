@@ -16,7 +16,6 @@ TODO:
 # Imports
 import pandas as pd
 
-from packaging.version import Version
 from ceasiompy.utils.progress import progress_update
 from ceasiompy.utils.ceasiompyutils import call_main
 from ceasiompy.smtrain.func.utils import (
@@ -57,7 +56,8 @@ from ceasiompy.smtrain import (
 
 
 # Constants
-PANDAS_VERSION = Version(pd.__version__)
+# Only (major, minor) is parsed: the patch part can carry a suffix (e.g. "3.0.0rc0").
+PANDAS_VERSION = tuple(map(int, pd.__version__.split(".")[:2]))
 
 
 # Methods
@@ -335,7 +335,7 @@ def _geometry_exploration(
     training_results_df = (
         (
             pd.concat([level1_df, level2_df], ignore_index=True, copy=False)
-            if PANDAS_VERSION < Version("3.0")
+            if PANDAS_VERSION < (3, 0)
             else pd.concat([level1_df, level2_df], ignore_index=True)
         )
         if "level2_df" in locals() and level2_df is not None
